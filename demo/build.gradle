@@ -1,0 +1,149 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.tasks'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(22)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'junit:junit:4.12'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+/*
+
+// Simple task to print string
+task hello {
+	doLast {
+		println 'Hello Gradle!'
+	}
+}
+
+// Shortcut for DoLast and string name for task
+task('helloString') << {
+	println "Hello String!"
+}
+
+// Alternative methode of creating tasks
+tasks.create(name: 'alternative') << {
+	println "Hello Alternatively!"
+}
+
+
+
+*/
+
+
+/* -----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x */
+
+/*
+
+// Defining tasks inside a project
+project(':projectA') {
+	task hello
+}
+
+// Printing path to the Tasks
+println tasks.getByPath('hello').path
+println tasks.getByPath('projectA:hello').path
+
+// Creating dependency after task creation
+hello.dependsOn helloString
+
+// Real World scenario: Clean and Compile
+task clean(type: Delete) {
+	delete rootProject.buildDir
+}
+
+task compileJava(dependsOn: clean) {
+	doLast {
+		println 'Compiling Java code after cleanup...'
+	}
+}
+
+// Defining dependency using task object
+task taskX << {
+	println 'taskX'
+}
+taskX.dependsOn {
+	tasks.findAll {
+		task → task.name.startsWith('tkn')
+	}
+}
+task tkn1 << {
+	println 'tkn1'
+}
+task tkn2 << {
+	println 'tkn2'
+}
+task notATkn << {
+	println 'notATkn'
+}
+
+
+// Gradle workflow -> Gradle clean build test
+task customClean {
+	doLast {
+		println 'Executing custom clean task...'
+		delete 'build'
+	}
+}
+
+task customBuild {
+	dependsOn 'customClean'
+	doLast {
+		println 'Executing custom build task...'
+		// Simulating build process
+		new File('build').mkdir()
+		new File('build/output.txt').text = 'Build output'
+	}
+}
+
+task customTest {
+	dependsOn 'customBuild'
+	doLast {
+		println 'Executing custom test task...'
+		// Simulating test process
+		assert new File('build/output.txt').text == 'Build output'
+		println 'Tests passed!'
+	}
+}
+
+// Define the default tasks
+defaultTasks 'customClean', 'customBuild', 'customTest'
+
+*/
+
+/* -----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x-----x */
+
+/*
+
+task testBuildCycle {
+	doFirst {
+		println('This is executed first during the Execution phase of the build.')
+	}
+	doLast {
+		println('This is executed last during the Execution phase of the build.')
+	}
+	println('This is also executed during the Execution phase of the build.')
+}
+
+ */

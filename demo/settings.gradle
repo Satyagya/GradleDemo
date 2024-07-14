@@ -1,0 +1,3 @@
+rootProject.name = 'demo'
+
+println 'This is executed during the Initialization phase of the build.'
